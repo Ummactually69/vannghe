@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bình Chọn Màn Trình Diễn Xuất Sắc Nhất</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    :root {
+      --gold: #f5b942;
+      --gold-2: #e08b1f;
+      --purple: #170a30;
+      --purple-2: #2b1055;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      padding: 40px 18px 110px;
+      background:
+        radial-gradient(900px 500px at 8% -5%, rgba(245,185,66,.16), transparent 60%),
+        radial-gradient(900px 550px at 92% 0%, rgba(155,89,182,.22), transparent 60%),
+        linear-gradient(180deg, #150829, #2b1055 45%, #0c0419);
+    }
+
+    .container { max-width: 1180px; margin: auto; text-align: center; }
+
+    .ornament {
+      color: var(--gold);
+      letter-spacing: 10px;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    h1 span {
+      background: linear-gradient(120deg, #ffe08a, #f5b942, #e08b1f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: rgba(255,255,255,.7);
+      max-width: 640px;
+      margin: 0 auto 30px;
+      line-height: 1.65;
+    }
+
+    .auth-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(245,185,66,.25);
+      border-radius: 20px;
+      padding: 16px 22px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+
+    .user-chip img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #ffe08a;
+      margin: 55px 0 25px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 3px;
+      margin: 12px auto 0;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #ffe08a, #e08b1f);
+    }
+
+    .top3-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 22px;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .top3-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(245,185,66,.3);
+      background: linear-gradient(180deg, rgba(52,23,96,.9), rgba(23,10,48,.95));
+      box-shadow: 0 25px 60px rgba(0,0,0,.45);
+      transition: .3s;
+    }
+
+    .top3-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(245,185,66,.75);
+      box-shadow: 0 30px 70px rgba(245,185,66,.15);
+    }
+
+    .top3-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .top3-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .badge-rank {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(10,4,24,.78);
+      border: 1px solid rgba(245,185,66,.55);
+      color: #ffe08a;
+      font-size: .75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+
+    .vote-count {
+      font-size: .82rem;
+      color: rgba(255,255,255,.7);
+      font-weight: 600;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 800;
+      border-radius: 999px;
+      transition: .2s;
+    }
+
+    .btn-vote {
+      background: linear-gradient(120deg, #ffe08a, #f5b942, #e08b1f);
+      color: #1a0832;
+      padding: 10px 22px;
+      font-size: .83rem;
+      box-shadow: 0 10px 25px rgba(245,185,66,.25);
+    }
+
+    .btn-vote:hover { transform: translateY(-2px); }
+
+    .btn-vote:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .voting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1080px;
+      margin: auto;
+    }
+
+    .vote-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px 16px;
+      transition: .25s;
+    }
+
+    .vote-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245,185,66,.55);
+      background: rgba(245,185,66,.08);
+    }
+
+    .circle-avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(155,89,182,.75);
+      margin-bottom: 14px;
+      transition: .25s;
+    }
+
+    .vote-item:hover .circle-avatar {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 5px rgba(245,185,66,.14);
+    }
+
+    .vote-item span {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .admin-trigger {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      background: rgba(10,4,24,.85);
+      border: 1px solid rgba(245,185,66,.45);
+      color: #ffe08a;
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: .82rem;
+      backdrop-filter: blur(10px);
+      display: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4,1,12,.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      width: min(520px, 100%);
+      max-height: 85vh;
+      overflow: auto;
+      background: linear-gradient(180deg, #2c1350, #180a31);
+      border: 1px solid rgba(245,185,66,.3);
+      border-radius: 24px;
+      padding: 28px;
+      text-align: left;
+    }
+
+    .modal-content h3 {
+      font-family: 'Playfair Display', serif;
+      color: #ffe08a;
+      margin-bottom: 18px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(8,3,20,.75);
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .modal-content input:focus,
+    .modal-content select:focus {
+      border-color: var(--gold);
+    }
+
+    .admin-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .admin-row img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .small-btn {
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 7px 12px;
+      font-size: .75rem;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .danger { color: #ff8a8a; border-color: rgba(255,138,138,.4); }
+
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: rgba(255,255,255,.7);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 28px 14px 110px; }
+      .auth-card { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="ornament">❖ ❖ ❖</div>
+
+    <h1>Bình Chọn Màn Trình <span>Diễn Xuất Sắc Nhất</span></h1>
+    <p class="subtitle">
+      Đăng nhập bằng Google để bình chọn cho tiết mục bạn yêu thích nhất.
+      Mỗi tài khoản Google chỉ được bình chọn một lần.
+    </p>
+
+    <div class="auth-card" id="authSection">
+      <span id="userStatusText">Đăng nhập Google để bình chọn:</span>
+      <div id="googleButton"></div>
+    </div>
+
+    <h2 class="section-title">TOP 3 TIẾT MỤC BGK ĐÁNH GIÁ CAO NHẤT</h2>
+    <div class="top3-container" id="top3Container"></div>
+
+    <h2 class="section-title">MỤC BÌNH CHỌN</h2>
+    <div class="voting-grid" id="votingGrid"></div>
+  </div>
+
+  <button class="admin-trigger" id="adminTrigger" onclick="openAdminModal()">⚙ Quản trị Admin</button>
+
+  <div class="modal" id="adminModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAdminModal()">&times;</span>
+
+      <h3>Quản trị tiết mục</h3>
+
+      <input type="text" id="itemName" placeholder="Tên thí sinh / tiết mục">
+      <input type="text" id="itemImg" placeholder="Link ảnh (URL)">
+      <select id="itemType">
+        <option value="top3">Top 3 — khối lớn</option>
+        <option value="normal">Mục bình chọn — avatar tròn</option>
+      </select>
+      <input type="number" id="itemRank" placeholder="Rank, chỉ cần cho Top 3">
+      <button class="btn btn-vote" onclick="addItem()">Thêm thí sinh</button>
+
+      <hr style="margin: 22px 0; border-color: rgba(255,255,255,.12);">
+
+      <h3>Danh sách thí sinh</h3>
+      <div id="adminList"></div>
+
+      <button class="btn btn-vote" onclick="resetAllVotes()">Reset toàn bộ bình chọn</button>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbxOhffGtbEKyu5GqOvB05dOD4IZn6qWvSu8krHqXiJw0htm7a4NFUHOu1-kks0uQo3o/exec";
+    let GOOGLE_CLIENT_ID = "";
+    let currentUser = null;
+    let isAdmin = false;
+    let allItems = [];
+
+    window.onload = async function () {
+      await loadConfig();
+      await loadData();
+      initGoogleSignIn();
+    };
+
+    async function loadConfig() {
+      const res = await fetch(API_URL + "?action=getConfig");
+      const data = await res.json();
+      GOOGLE_CLIENT_ID = data.googleClientId;
+    }
+
+    function initGoogleSignIn() {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleCredentialResponse
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("googleButton"),
+        {
+          theme: "filled_black",
+          size: "large",
+          shape: "pill",
+          text: "signin_with",
+          locale: "vi"
+        }
+      );
+    }
+
+    async function handleCredentialResponse(response) {
+      currentUser = {
+        credential: response.credential
+      };
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "adminAction",
+          credential: response.credential,
+          subAction: "checkAdmin"
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.success && data.isAdmin) {
+        isAdmin = true;
+        document.getElementById("adminTrigger").style.display = "block";
+      }
+
+      await loadUserProfile();
+      await loadData();
+    }
+
+    async function loadUserProfile() {
+      const payload = decodeJwt(currentUser.credential);
+
+      document.getElementById("authSection").innerHTML = `
+        <div class="user-chip">
+          <img src="${payload.picture}" alt="">
+          <div style="text-align:left;">
+            <div style="font-size:.85rem; font-weight:700;">${payload.name}</div>
+            <div style="font-size:.75rem; color:rgba(255,255,255,.65);">${payload.email}</div>
+          </div>
+        </div>
+        ${isAdmin ? '<span style="color:#ffe08a; font-weight:700; font-size:.8rem;">ADMIN</span>' : ''}
+      `;
+    }
+
+    function decodeJwt(token) {
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64).split("").map(c => {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join("")
+      );
+      return JSON.parse(jsonPayload);
+    }
+
+    async function loadData() {
+      const res = await fetch(API_URL + "?action=getData");
+      const data = await res.json();
+
+      if (!data.success) return;
+
+      allItems = data.items;
+      renderUI(allItems);
+
+      if (isAdmin) {
+        renderAdminList();
+      }
+    }
+
+    function renderUI(items) {
+      const top3Container = document.getElementById("top3Container");
+      const votingGrid = document.getElementById("votingGrid");
+
+      top3Container.innerHTML = "";
+      votingGrid.innerHTML = "";
+
+      items.forEach(item => {
+        if (item.type === "top3") {
+          top3Container.innerHTML += `
+            <div class="top3-card">
+              <div class="badge-rank">Top ${item.rank || 1}</div>
+              <img src="${item.image}" alt="${item.name}">
+              <div class="top3-info">
+                <h3>${item.name}</h3>
+                <div class="vote-count">${item.votes} bình chọn</div>
+                <button class="btn btn-vote" onclick="vote('${item.id}', '${item.name}')">Bình chọn</button>
+              </div>
+            </div>
+          `;
+        }
+
+        votingGrid.innerHTML += `
+          <div class="vote-item">
+            <img src="${item.image}" class="circle-avatar" alt="${item.name}">
+            <span>${item.name}</span>
+            <div class="vote-count">${item.votes} bình chọn</div>
+            <button class="btn btn-vote" onclick="vote('${item.id}', '${item.name}')">Bình chọn</button>
+          </div>
+        `;
+      });
+    }
+
+    async function vote(id, name) {
+      if (!currentUser) {
+        alert("Vui lòng đăng nhập Google trước khi bình chọn.");
+        return;
+      }
+
+      if (!confirm(`Bạn chắc chắn bình chọn cho "${name}"? Mỗi tài khoản chỉ được bình chọn một lần.`)) {
+        return;
+      }
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "vote",
+          credential: currentUser.credential,
+          contestantId: id,
+          target: name
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert(data.message);
+        await loadData();
+      } else {
+        alert(data.message);
+      }
+    }
+
+    function openAdminModal() {
+      document.getElementById("adminModal").style.display = "flex";
+      renderAdminList();
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").style.display = "none";
+    }
+
+    function renderAdminList() {
+      const list = document.getElementById("adminList");
+      list.innerHTML = "";
+
+      allItems.forEach(item => {
+        list.innerHTML += `
+          <div class="admin-row">
+            <img src="${item.image}" alt="">
+            <div style="flex:1; text-align:left;">
+              <div style="font-weight:700;">${item.name}</div>
+              <div style="font-size:.78rem; color:rgba(255,255,255,.6);">
+                ID ${item.id} • ${item.votes} votes • ${item.type}
+              </div>
+            </div>
+            <button class="small-btn" onclick="resetVotes('${item.id}')">Reset</button>
+            <button class="small-btn danger" onclick="deleteItem('${item.id}')">Xoá</button>
+          </div>
+        `;
+      });
+    }
+
+    async function addItem() {
+      const name = document.getElementById("itemName").value.trim();
+      const image = document.getElementById("itemImg").value.trim();
+      const type = document.getElementById("itemType").value;
+      const rank = document.getElementById("itemRank").value;
+
+      if (!name || !image) {
+        alert("Vui lòng nhập tên và link ảnh.");
+        return;
+      }
+
+      await adminRequest({
+        subAction: "addItem",
+        name,
+        image,
+        type,
+        rank
+      });
+
+      document.getElementById("itemName").value = "";
+      document.getElementById("itemImg").value = "";
+      document.getElementById("itemRank").value = "";
+    }
+
+    async function resetVotes(id) {
+      if (!confirm("Reset số bình chọn của thí sinh này?")) return;
+
+      await adminRequest({
+        subAction: "resetVotes",
+        id
+      });
+    }
+
+    async function deleteItem(id) {
+      if (!confirm("Xoá thí sinh này khỏi cuộc thi?")) return;
+
+      await adminRequest({
+        subAction: "deleteItem",
+        id
+      });
+    }
+
+    async function resetAllVotes() {
+      if (!confirm("Reset toàn bộ bình chọn? Hành động này không thể hoàn tác.")) return;
+
+      await adminRequest({
+        subAction: "resetAllVotes"
+      });
+    }
+
+    async function adminRequest(payload) {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "adminAction",
+          credential: currentUser.credential,
+          ...payload
+        })
+      });
+
+      const data = await res.json();
+      alert(data.message);
+
+      if (data.success) {
+        await loadData();
+      }
+    }
+  </script>
+</body>
+</html>
